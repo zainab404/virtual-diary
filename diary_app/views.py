@@ -7,8 +7,8 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from models import DiaryEntry
-from forms import NewEntryForm
+from .models import DiaryEntry
+from .forms import NewEntryForm
 #***import loginrequired for class views, but only after research
 # Create your views here.
 def index(request):
