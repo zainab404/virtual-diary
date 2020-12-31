@@ -16,8 +16,8 @@ class DiaryEntry(models.Model):
         self.published_date(timezone.now())
         self.save()
 
-    # def get_absolute_url(self):
-    #     pass
+    def get_absolute_url(self):
+        return reverse('entry_detail',kwargs={'pk':self.pk})
 
     def __str__(self):
         return self.title

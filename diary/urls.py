@@ -12,6 +12,11 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
+
+{% url 'entry_list' %}
+{% url 'entry_new' %}
+{% url 'entry_draft_list' %}
+        
 """
 from django.conf.urls import url, include
 from django.urls import path
@@ -22,7 +27,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('diary_app.urls')),
     path('accounts/login/', views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-    path('accounts/logout', views.LogoutView.as_view(), name='logout', kwargs={'next_page':'/'}),
-
+    path('accounts/logout/', views.LogoutView.as_view(), name='logout', kwargs={'next_page':'/'}),
 ]
 
