@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Diary Entry</title>
-</head>
-<body>
+{% extends 'diary_app/base.html' %}
+{% block body_block %}
+    <h1 class="entry-title">{{ diaryentry.title }}</h1>
     
-</body>
-</html>
+    {% if diaryentry.published_date %}
+        <div class="entry published-date"> {{diaryentry.published_date}}
+        </div>
+    {% else %}
+        <a href="{% url 'publish_entry' pk=diaryentry.pk %}">Publish</a>
+
+    {% endif %}
+{% endblock %}

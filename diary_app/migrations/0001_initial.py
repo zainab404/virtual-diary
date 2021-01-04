@@ -25,7 +25,6 @@ class Migration(migrations.Migration):
                 ('title', models.DateTimeField(default=datetime.datetime(2020, 12, 29, 0, 20, 29, 971014, tzinfo=utc))),
                 ('published_date', models.DateTimeField(blank=True, null=True)),
                 ('text', models.TextField()),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]
