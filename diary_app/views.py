@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.views.generic import (ListView, DetailView, CreateView, UpdateView, DeleteView)
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -73,37 +73,42 @@ class EntryDetail(DetailView, LoginRequiredMixin):
 
 @login_required
 def publish_entry(request, pk):
-    print("======Publishing from views======")
-    specific_entry = get_object_or_404(DiaryEntry, pk=pk)
-    specific_entry.publish()
-    return redirect('entry_detail', pk=specific_entry.pk)
+    print("============publis_entry_view==========")
+    entry = get_object_or_404(DiaryEntry, pk=pk)
+    entry.publish()
 
-# class EntryList(ListView, LoginRequiredMixin):
-#     login_url = '/login/'
-#     model = DiaryEntry
+    return redirect('entry_detail', pk=entry.pk)
 
-#     def get_queryset(self):
-#         return DiaryEntry.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+class EntryList(ListView, LoginRequiredMixin):
+    template_name = 'entry_list.html'
+    login_url = '/login/'
+    redirect_field_name = 'diary_app/new_entry.html'
+    model = DiaryEntry
 
-# class DraftList(ListView, LoginRequiredMixin):
-#     login_url = '/login/'
-#     redirect_field_name = 'entry_list.html'
-#     model = DiaryEntry
+    def get_queryset(self):
+        return DiaryEntry.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
 
-#     def get_queryset(self):
-#         return DiaryEntry.objects.filter(published_date__isnull=True).order_by('-published_date')
-
-
-# class UpdateEntry(UpdateView, LoginRequiredMixin):
-#     login_url = '/login/'
-#     redirect_field_name = 'diary_app/entry_detail.html'
-#     form_class = NewEntryForm
-#     model = DiaryEntry
+class DraftList(ListView, LoginRequiredMixin):
+    template_name = 'entry_draft_list.html'
+    login_url = '/login/'
+    redirect_field_name = 'diary_app/entry_list.html'
+    model = DiaryEntry
 
 
-# class DeleteEntry(DeleteView, LoginRequiredMixin):
-#     model = DiaryEntry
-#     success_url = reverse_lazy('entry_list')
-#     #^how come its not 'diary/entry_list'
+    def get_queryset(self):
+        
+        return DiaryEntry.objects.all().filter(published_date__isnull=True).order_by('-published_date')
+
+class UpdateEntry(UpdateView, LoginRequiredMixin):
+    template_name = 'new_entry.html'
+    login_url = '/login/'
+    redirect_field_name = 'diary_app/entry_detail.html'
+    form_class = NewEntryForm
+    model = DiaryEntry
 
 
+class DeleteEntry(DeleteView, LoginRequiredMixin):
+    template_name = 'confirm_delete.html'
+    model = DiaryEntry
+    success_url = reverse_lazy('entry_list')
+    #^how come its not 'diary/entry_list'

@@ -1,4 +1,10 @@
 {% extends 'diary_app/base.html' %}
 {% block body_block %}
     <h1>List of Entry Drafts: </h1>
+        {% for entry in diaryentry_list %}
+        <div class="entry">
+            <h1><a href="{% url 'entry_detail' pk=entry.pk %}">{{ entry.title }}</a></h1>
+            <p>{{ entry.text|truncatechars:200 }}</p>
+        </div>
+        {% endfor %}
 {% endblock %}

@@ -1,5 +1,14 @@
 {% extends 'diary_app/base.html' %}
-
+{% load static %}
 {% block body_block %}
-    <h1>TEST</h1>
+    <h1>Virtual Diary</h1>
+
+        
+<div class="example">
+        <a href=" {% url 'user_login' %} "class="">Start</a>
+        <a class="btn secondary">Select</a>
+        <a class="btn tertiary">Reset</a>
+        <a class="btn">Cancel</a>
+      </div>
+
 {% endblock %}

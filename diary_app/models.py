@@ -12,7 +12,7 @@ class DiaryEntry(models.Model):
     published_date = models.DateTimeField(blank=True, null=True)
 
     def publish(self):
-        print('========Publishing (models) ========')
+        print('=============publish_model============')
         self.published_date = timezone.now()
         self.save()
 
@@ -21,5 +21,3 @@ class DiaryEntry(models.Model):
 
     def __str__(self):
         return self.text
-
-

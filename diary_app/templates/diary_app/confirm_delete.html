@@ -1,0 +1,9 @@
+{% extends 'diary_app/base.html' %}
+{% block body_block %}
+<form method="POST">
+    {% csrf_token %}
+    
+    <h1>Are you sure you want to delete {{diaryentry.title}}?</h1>
+    <input type="submit" value="Confirm" class="class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+</form>
+{% endblock %}
