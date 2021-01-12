@@ -3,7 +3,34 @@
     <h1>New Diary Entry</h1>
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Done">
-    </form>
+        {{ form.as_p|safe }}
+        {{ form.date|safe }}
+        <style>body {font-family: Arial, sans-serif;}</style>
+  
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      
+        <!-- Fengyuan Chen's Datepicker -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
+      </head>
+      <body>
+      
+        <input id="datepicker">
+      
+        <script>
+          $(function () {
+            $("#datepicker").datepicker();
+          });
+        </script>
+        <script>
+                $(function () {
+                  $("#id_date").datepicker({
+                    format:'dd/mm/yyyy',
+                  });
+                });
+              </script>
+    <script>var editor = new MediumEditor('.editable');</script>
+    <input type="submit" cclass="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" value="Done">
+    
 {% endblock %}

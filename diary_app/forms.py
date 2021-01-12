@@ -15,3 +15,6 @@ class UserForm(forms.ModelForm):
     class Meta():
         model = User
         fields = ('username', 'password')
+
+class DateForm(forms.Form):
+    date = forms.DateField(input_formats=['%d/%m/%Y'])

@@ -7,12 +7,11 @@ from django.urls import reverse
 # Create your models here.
 
 class DiaryEntry(models.Model):
-    title = models.DateTimeField(default=timezone.now())
+    title = models.CharField(max_length=264)
     text = models.TextField()
     published_date = models.DateTimeField(blank=True, null=True)
 
     def publish(self):
-        print('=============publish_model============')
         self.published_date = timezone.now()
         self.save()
 

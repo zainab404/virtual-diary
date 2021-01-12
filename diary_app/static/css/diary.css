@@ -17,6 +17,15 @@ body {
 	text-align: center;
 }
 
+.website-title{
+	font-family: 'VT323', monospace ;
+	font-size: 24px;
+}
+
+.editable{
+	border: 5px solid black
+}
+
 .example {
 	background: white;
 	margin: 0 auto;
